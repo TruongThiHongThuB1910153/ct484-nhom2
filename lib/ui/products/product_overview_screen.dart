@@ -12,7 +12,7 @@ class ProductsOverviewScreen extends StatefulWidget {
 
 }
   class _ProductsOverviewScreenState extends State<ProductsOverviewScreen> {
-    var _showOnlyFavorites = false;
+     var _showOnlyFavorites = false;
 
     @override 
     Widget build(BuildContext context) {
@@ -43,14 +43,12 @@ class ProductsOverviewScreen extends StatefulWidget {
       return PopupMenuButton(
         onSelected: (FilterOptions selectedValue) {
           setState(() {
-            if (selectedValue = FilterOptions.favorites) {
-              _showOnlyFavorites = true;
-            } else {
-              _showOnlyFavorites =false;
-            }
-           
-          });
-        },
+              if (selectedValue == FilterOptions.favorites) {
+                  _showOnlyFavorites = true;
+              } else
+                  _showOnlyFavorites = false;
+                });
+    },
         icon: const Icon(
           Icons.more_vert,
         ),
