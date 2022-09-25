@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 
-import 'ui/cart/cart_screen.dart';
+
+import 'ui/orders/orders_screen.dart';
+
+
 
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
@@ -18,7 +21,7 @@ class MyApp extends StatelessWidget {
         ),
       ),
       home: const SafeArea(
-        child: CartScreen(),
+        child: OrdersScreen(),
       ),
     );
   }
