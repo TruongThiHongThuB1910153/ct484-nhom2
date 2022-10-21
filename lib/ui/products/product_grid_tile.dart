@@ -22,14 +22,18 @@ class ProductGridTile extends StatelessWidget {
           footer: buildGridFooterBar(context),
           child: GestureDetector(
             onTap: () {
-              print('Go to product detail screen');
+              Navigator.of(context).push(
+                MaterialPageRoute(
+                  builder: (ctx) => ProductDetailScreen(product),
+                ),
+              );
             },
             child: Image.network(
               product.imageUrl,
               fit: BoxFit.cover,
             ),
           ),
-        ),
+        )
       );
     }
 
@@ -42,7 +46,7 @@ class ProductGridTile extends StatelessWidget {
             ),
           color: Theme.of(context).colorScheme.secondary,
           onPressed: () {
-            print('Toggle a favorite product');
+             print('Toggle a favorite product');
           },
           ),
           title: Text(

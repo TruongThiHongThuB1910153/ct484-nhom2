@@ -3,14 +3,14 @@ import '../../models/product.dart';
 class ProductsManager {
   final List<Product> _items = [
     Product(
-    id: 'p1',
-    title: 'Red Shirt',
-    description: 'A red shirt - it is pretty red!',
-    price: 29.99,
-    imageUrl:
-    'https://cdn.pixabay.com/photo/2016/10/02/22/17/red-t-shirt-1710578_1280.jpg',
-    isFavorite: true,
-  ),
+      id: 'p1',
+      title: 'Red Shirt',
+      description: 'A red shirt - it is pretty red!',
+      price: 29.99,
+      imageUrl:
+      'https://cdn.pixabay.com/photo/2016/10/02/22/17/red-t-shirt-1710578_1280.jpg',
+      isFavorite: true,
+    ),
     Product(
       id: 'p2',
       title: 'Trousers',
@@ -49,4 +49,9 @@ class ProductsManager {
   List<Product> get favoriteItems {
     return _items.where((prodItem) => prodItem.isFavorite).toList();
   }
+
+  Product findById(String id) {
+    return _items.firstWhere((prod) => prod.id == id);
+  }
 }
+

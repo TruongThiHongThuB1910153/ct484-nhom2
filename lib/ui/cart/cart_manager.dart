@@ -1,4 +1,5 @@
 import '../../models/cart_item.dart';
+
 class CartManager {
   final Map<String, CartItem> _items = {
     'p1': CartItem(
@@ -8,13 +9,14 @@ class CartManager {
       quantity: 2,
     ),
   };
-
   int get productCount {
     return _items.length;
   }
+
   List<CartItem> get products {
     return _items.values.toList();
   }
+
   Iterable<MapEntry<String, CartItem>> get productEntries {
     return {..._items}.entries;
   }
