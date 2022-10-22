@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:myshop/ui/products/user_products_screen.dart';
 import 'ui/screens.dart';
+import 'package:provider/provider.dart';
 
 void main() {
   runApp(const MyApp());
@@ -12,11 +13,16 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (ctx) => ProductsManager(),
+        )
+      ],
+      child: MaterialApp(
       title: 'My Shop',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        fontFamily: 'Lato',
+        fontFamily: 'LaTo',
         colorScheme: ColorScheme.fromSwatch(
           primarySwatch: Colors.purple,
         ).copyWith(
@@ -35,17 +41,16 @@ class MyApp extends StatelessWidget {
           return MaterialPageRoute(
             builder: (ctx) {
               return ProductDetailScreen(
-                ProductsManager().findById(productId),
+                ctx.read<ProductsManager>().findById(productId),
               );
             },
           );
         }
         return null;
       },
-
       // home: const SafeArea(
       //   child: UserProductScreen(),
-      // ),
+      ), // ),
     );
   }
 }
