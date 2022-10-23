@@ -1,4 +1,7 @@
+// ignore_for_file: avoid_print
+
 import 'package:flutter/material.dart';
+import 'package:myshop/ui/products/edit_product_screen.dart';
 import 'package:myshop/ui/shared/app_drawer.dart';
 import 'package:provider/provider.dart';
 
@@ -12,12 +15,12 @@ class UserProductScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final productsManager = ProductsManager();
+
     return Scaffold(
       appBar: AppBar(
         title: const Text('Your Products'),
         actions: <Widget>[
-          buildAddButton(),
+          buildAddButton(context),
         ],
       ),
       drawer: const AppDrawer(),
@@ -47,11 +50,13 @@ class UserProductScreen extends StatelessWidget {
     );
   }
 
-  Widget buildAddButton() {
+  Widget buildAddButton( BuildContext context) {
     return IconButton(
       icon: const Icon(Icons.add),
       onPressed: () {
-        print('Go to edit product screen');
+       Navigator.of(context).pushNamed(
+           EditProductScreen.routeName,
+       );
       },
     );
   }

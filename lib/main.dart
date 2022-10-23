@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:myshop/ui/products/user_products_screen.dart';
 import 'ui/screens.dart';
 import 'package:provider/provider.dart';
-
+import 'package:myshop/ui/products/edit_product_screen.dart';
 void main() {
   runApp(const MyApp());
 }
@@ -19,6 +19,9 @@ class MyApp extends StatelessWidget {
         ),
         ChangeNotifierProvider(
             create: (ctx) => CartManager(),
+        ),
+        ChangeNotifierProvider(
+            create: (ctx) => OrdersManager(),
         ),
       ],
       child: MaterialApp(
@@ -39,7 +42,7 @@ class MyApp extends StatelessWidget {
         UserProductScreen.routeName: (ctx) => const UserProductScreen(),
       },
       onGenerateRoute: (settings) {
-        if (settings.name == ProductDetailScreen.routeName) {
+          if (settings.name == ProductDetailScreen.routeName) {
           final productId = settings.arguments as String;
           return MaterialPageRoute(
             builder: (ctx) {
@@ -49,10 +52,20 @@ class MyApp extends StatelessWidget {
             },
           );
         }
-        return null;
-      },
-      // home: const SafeArea(
-      //   child: UserProductScreen(),
+    if (settings.name == EditProductScreen.routeName) {
+    final productId = settings.arguments as String?;
+    return MaterialPageRoute(
+    builder: (ctx) {
+    return EditProductScreen(
+    productId != null
+    ? ctx.read<ProductsManager>().findById(productId)
+        : null,
+    );
+    },
+    );
+    }
+    return null;
+    } // home: const Safe//   child: UserProductScreen(),
       ), // ),
     );
   }
