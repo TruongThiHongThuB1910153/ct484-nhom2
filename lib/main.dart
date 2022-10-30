@@ -7,7 +7,6 @@ import 'package:myshop/ui/products/edit_product_screen.dart';
 
 Future<void> main()async {
   await dotenv.load();
-  await dotenv.load();
   runApp(const MyApp());
 }
 
@@ -21,9 +20,15 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(
             create: (ctx) => AuthManager(),
         ),
-           ChangeNotifierProvider(
-               create: (ctx) => ProductsManager(),
-           ),
+        ChangeNotifierProxyProvider<AuthManager, ProductsManager>(
+          create: (ctx) => ProductsManager(),
+          update: (ctx, authManager, productsManager) {
+// Khi authManager có báo hiệu thay đổi thì đọc lại authToken
+// cho productManager
+            productsManager!.authToken = authManager.authToken;
+            return productsManager;
+          },
+        ),
             ChangeNotifierProvider(
                 create: (ctx) => CartManager(),
             ),
